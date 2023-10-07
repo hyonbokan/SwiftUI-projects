@@ -10,7 +10,8 @@ import Foundation
 /// ViewModel for list of items view
 /// Primary tab
 class ToDoListViewViewModel: ObservableObject {
-    init() {}
+    @Published var showingNewItemView = false
     
+    init() {}
     
 }

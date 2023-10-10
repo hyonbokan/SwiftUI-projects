@@ -44,6 +44,9 @@ struct LogInView: View {
                     .padding()
                 }
                 .offset(y: -50)
+                .alert(isPresented: $viewModel.showAlert) {
+                    Alert(title: Text("Error"), message: (Text("Can't log in. Please check if email and password are correct.")))
+                }
                 
                 // Create Account
                 VStack {

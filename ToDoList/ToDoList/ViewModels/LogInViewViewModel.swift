@@ -11,6 +11,7 @@ class LogInViewViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var errorMessage = ""
+    @Published var showAlert = false
     
     init() {}
     
@@ -20,11 +21,14 @@ class LogInViewViewModel: ObservableObject {
         }
         
         // Try log in
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
             if result != nil, error == nil {
                 print("User logged in")
             } else {
+                // show alert true
+                self?.showAlert = true
                 print("Can't log in")
+                
             }
         }
     }

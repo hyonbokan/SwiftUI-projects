@@ -8,7 +8,7 @@ import FirebaseFirestoreSwift
 import SwiftUI
 
 struct ToDoListView: View {
-    @StateObject var viewModel: ToDolistItemViewModel
+    @StateObject var viewModel: ToDoListViewViewModel
     @FirestoreQuery var items: [ToDoListItem]
     
 //    private let userId: String
@@ -33,7 +33,6 @@ struct ToDoListView: View {
                                 viewModel.delete(id: item.id)
                             }
                             .tint(.red)
-
                         }
                 }
                 .listStyle(PlainListStyle())
@@ -58,6 +57,6 @@ struct ToDoListView: View {
 
 struct ToDoListItemsViews_Previews: PreviewProvider {
     static var previews: some View {
-        ToDoListView(userId: "tGTkIXB0Dbfu9CVh4nVc81HOhSP2")
+        ToDoListView(userId: "iZKeuWvNyQhetajOjHuwibYppK03")
     }
 }

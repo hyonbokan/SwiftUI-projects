@@ -6,11 +6,7 @@ This repository contains a collection of projects built using SwiftUI. Each proj
 
 ### 1. ToDoList
 
-#### Description
-
 **ToDoList** is a task management application that allows users to efficiently manage their daily tasks. 
-
-#### Features:
 
 - **User Authentication**: Users can easily register and log in to the app. Authentication is securely handled using Firebase Auth.
   
@@ -21,8 +17,6 @@ This repository contains a collection of projects built using SwiftUI. Each proj
   
 - **Backend**: The backend of the app is powered by Firebase. All data is stored and fetched in real-time from Firebase Firestore.
 
-#### Demo:
-
-![Screenshot 1](Project_img/ToDoList_login.png)
-![Screenshot 2](Project_img/ToDoList_register.png)
-![Video Demo](Project_img/ToDoList_video.mp4)
+<img src="Project_img/ToDoList_login.png" width="400">
+<img src="Project_img/ToDoList_register.png" width="400">
+<!-- ![Video Demo](Project_img/ToDoList_video.mp4) -->

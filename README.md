@@ -18,6 +18,9 @@ This repository contains a collection of projects built using SwiftUI. Each proj
 - **Backend**: The backend of the app is powered by Firebase. All data is stored and fetched in real-time from Firebase Firestore.
 
 <p float="left">
-  <img src="Project_img/ToDoList_login.png" width="200" />
-  <img src="Project_img/ToDoList_register.png" width="200" /> 
+  <img src="Project_img/ToDo/ToDoList_login.png" width="200" />
+  <img src="Project_img/ToDo/ToDoList_register.png" width="200" />
+  <img src="Project_img/ToDo/ToDoList_main.png" width="200" /> 
+  <img src="Project_img/ToDo/ToDoList_profile.png" width="200" />
+  <img src="Project_img/ToDo/ToDoList_addItem.png" width="200" />
 </p>

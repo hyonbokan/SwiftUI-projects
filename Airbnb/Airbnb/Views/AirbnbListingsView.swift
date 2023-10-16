@@ -8,7 +8,26 @@
 import SwiftUI
 
 struct AirbnbListingsView: View {
+    @StateObject var viewModel = AirbnbListingsViewViewModel()
+    
     var body: some View {
-        Text("Hello!")
+        NavigationView {
+            VStack {
+                if viewModel.listrings.isEmpty {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                } else {
+                    List(viewModel.listrings) { listing in
+                        NavigationLink(destination: AirbnbDetailView(model: listing), label: {
+                            AirbnbListingCardView(model: listing)
+                        })
+                    }
+                }
+            }
+            .navigationTitle("Airbnb")
+        }
+        .onAppear{
+            viewModel.fetchListring()
+        }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E7EF89F2ADCF62A005A778D /* AirbnbListingsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7EF89E2ADCF62A005A778D /* AirbnbListingsViewViewModel.swift */; };
 		BD03452A2ADBEAF4008EF898 /* AirbnbApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0345292ADBEAF4008EF898 /* AirbnbApp.swift */; };
 		BD03452C2ADBEAF4008EF898 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD03452B2ADBEAF4008EF898 /* ContentView.swift */; };
 		BD03452E2ADBEAF4008EF898 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD03452D2ADBEAF4008EF898 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E7EF89E2ADCF62A005A778D /* AirbnbListingsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirbnbListingsViewViewModel.swift; sourceTree = "<group>"; };
 		BD0345262ADBEAF4008EF898 /* Airbnb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbnb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD0345292ADBEAF4008EF898 /* AirbnbApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirbnbApp.swift; sourceTree = "<group>"; };
 		BD03452B2ADBEAF4008EF898 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +46,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E7EF89D2ADCF621005A778D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9E7EF89E2ADCF62A005A778D /* AirbnbListingsViewViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		BD03451D2ADBEAF3008EF898 = {
 			isa = PBXGroup;
 			children = (
@@ -63,9 +73,9 @@
 		BD0345282ADBEAF4008EF898 /* Airbnb */ = {
 			isa = PBXGroup;
 			children = (
+				9E7EF89D2ADCF621005A778D /* ViewModels */,
 				BD03453A2ADBEB23008EF898 /* Services */,
 				BD0345392ADBEB1B008EF898 /* Models */,
-				BD0345382ADBEB0E008EF898 /* ViewModels */,
 				BD0345372ADBEB04008EF898 /* Views */,
 				BD0345292ADBEAF4008EF898 /* AirbnbApp.swift */,
 				BD03452D2ADBEAF4008EF898 /* Assets.xcassets */,
@@ -91,13 +101,6 @@
 				BD0345412ADBED88008EF898 /* AirbnbDetailView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		BD0345382ADBEB0E008EF898 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		BD0345392ADBEB1B008EF898 /* Models */ = {
@@ -192,6 +195,7 @@
 				BD0345422ADBED88008EF898 /* AirbnbDetailView.swift in Sources */,
 				BD03453E2ADBECDF008EF898 /* AirbnbListingsView.swift in Sources */,
 				BD0345402ADBED55008EF898 /* AirbnbListingCardView.swift in Sources */,
+				9E7EF89F2ADCF62A005A778D /* AirbnbListingsViewViewModel.swift in Sources */,
 				BD03453C2ADBEB3B008EF898 /* APIService.swift in Sources */,
 				BD0345462ADBEDBE008EF898 /* AirbnbListing.swift in Sources */,
 				BD03452A2ADBEAF4008EF898 /* AirbnbApp.swift in Sources */,

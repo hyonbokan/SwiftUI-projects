@@ -18,9 +18,22 @@ This repository contains a collection of projects built using SwiftUI. Each proj
 - **Backend**: The backend of the app is powered by Firebase. All data is stored and fetched in real-time from Firebase Firestore.
 
 <p float="left">
-  <img src="Project_img/ToDo/ToDoList_login.png" width="200" />
-  <img src="Project_img/ToDo/ToDoList_register.png" width="200" />
-  <img src="Project_img/ToDo/ToDoList_main.png" width="200" /> 
-  <img src="Project_img/ToDo/ToDoList_profile.png" width="200" />
-  <img src="Project_img/ToDo/ToDoList_addItem.png" width="200" />
+  <img src="Project_img/ToDo/ToDoList_login.png" width="200" style="margin-right: 10px;" />
+  <img src="Project_img/ToDo/ToDoList_register.png" width="200" style="margin-right: 10px;" />
+  <img src="Project_img/ToDo/ToDoList_main.png" width="200" style="margin-right: 10px;" /> 
+  <img src="Project_img/ToDo/ToDoList_profile.png" width="200" style="margin-right: 10px;" />
+  <img src="Project_img/ToDo/ToDoList_addItem.png" width="200" style="margin-right: 10px;" />
+  <img src="Project_img/ToDo/ToDoList_video.gif" width="200" style="margin-right: 10px;" />
 </p>
+
+### 2. Airbnb
+
+**Airbnb** offers a simplified version of the popular Airbnb platform. This project was designed to provide a hands-on learning experience, focusing on API integration, data modeling, and creating a user interface using SwiftUI.
+
+### Key Features:
+
+- **API Integration**: In this project, we delve into the world of APIs and learn how to interact with external data sources. We utilize the Airbnb API, which is sourced from [OpenDataSoft](https://public.opendatasoft.com/explore/dataset/airbnb-listings/table/?disjunctive.host_verifications&disjunctive.amenities&disjunctive.features), to fetch scrapped data for Airbnb listings.
+
+- **Data Modeling**: A fundamental aspect of this project is creating and defining structures for Airbnb listings.
+
+- **User Interface**: The app presents a list of Airbnb listings in New York, providing essential information such as photos, listing details, and host information.

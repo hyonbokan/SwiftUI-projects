@@ -1,12 +1,14 @@
 # SwiftUI-projects
 
-This repository contains a collection of projects built using SwiftUI. Each project showcases different features and functionalities implemented using SwiftUI.
+This repository contains a collection of projects built using SwiftUI. Each project showcases different features and functionalities implemented using SwiftUI. A repo with the same projects, but with UIKit is [here](https://github.com/hyonbokan/Swift-UIkit-Projects)
 
 ## Projects
 
 ### 1. ToDoList
 
 **ToDoList** is a task management application that allows users to efficiently manage their daily tasks. 
+
+#### Key Features:
 
 - **User Authentication**: Users can easily register and log in to the app. Authentication is securely handled using Firebase Auth.
   
@@ -30,7 +32,7 @@ This repository contains a collection of projects built using SwiftUI. Each proj
 
 **Airbnb** offers a simplified version of the popular Airbnb platform. This project was designed to provide a hands-on learning experience, focusing on API integration, data modeling, and creating a user interface using SwiftUI.
 
-### Key Features:
+#### Key Features:
 
 - **API Integration**: In this project, we delve into the world of APIs and learn how to interact with external data sources. We utilize the Airbnb API, which is sourced from [OpenDataSoft](https://public.opendatasoft.com/explore/dataset/airbnb-listings/table/?disjunctive.host_verifications&disjunctive.amenities&disjunctive.features), to fetch scrapped data for Airbnb listings.
 

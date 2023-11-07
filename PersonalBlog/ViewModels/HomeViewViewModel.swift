@@ -4,6 +4,7 @@
 //
 //  Created by dnlab on 11/6/23.
 //
+import FirebaseStorage
 import FirebaseFirestore
 import Foundation
 
@@ -13,6 +14,8 @@ class HomeViewViewModel: ObservableObject {
     @Published var isDataFetched = false
     
     private let database = Firestore.firestore()
+    
+    private let storage = Storage.storage().reference()
     
     init() {}
     
@@ -67,8 +70,13 @@ class HomeViewViewModel: ObservableObject {
                   error == nil else {
                 return
             }
-//            print(posts)
             completion(.success(posts))
+        }
+    }
+    
+    public func getUserProfileImageUrl(for username: String, completion: @escaping (URL?) -> Void) {
+        storage.child("\(username)/profile_picture.png").downloadURL { url, error in
+            completion(url)
         }
     }
     
@@ -78,30 +86,35 @@ class HomeViewViewModel: ObservableObject {
         }
         isDataFetched = true
         findAllUsers { [weak self] users in
-            print("\nAll user: \(users)\n")
             let group = DispatchGroup()
-
             for user in users {
                 group.enter()
                 self?.getPosts(username: user.name) { result in
-                    defer {
-                        group.leave()
-                    }
                     switch result {
                     case .success(let posts):
-                        DispatchQueue.main.async {
-                            let userBlogPosts =  UserBlogPosts(id: UUID().uuidString, posts: posts, owner: user)
-                            self?.userPosts.append(userBlogPosts)
+                        // Get the profile picture URL
+                        self?.storage.child("\(user.name)/profile_picture.png").downloadURL { url, error in
+                            defer { group.leave() }
+                            guard let url = url, error == nil else {
+                                print(error ?? "Unknown error")
+                                return
+                            }
+                            DispatchQueue.main.async {
+                                let userBlogPosts = UserBlogPosts(id: UUID().uuidString, posts: posts, owner: user, userProfileImage: url)
+                                self?.userPosts.append(userBlogPosts)
+                            }
                         }
                     case .failure(let error):
                         print(error)
-                        break
+                        group.leave()
                     }
                 }
             }
-            group.notify(queue: .main) {
+            group.notify(queue: .main) { [weak self] in
+                self?.userPosts.sort(by: { $0.posts.first?.date ?? Date() > $1.posts.first?.date ?? Date() })
                 print("All the user posts have been fetched")
             }
         }
     }
+    
 }

@@ -9,19 +9,30 @@ import SwiftUI
 
 struct BlogPostItemViewHeaderView: View {
     let username: String
-    let profileImage: String
+    let profileImageUrl: URL?
     
     var body: some View {
         HStack {
             Button(action: {
                 print("user tapped")
             }) {
-                Image(systemName: profileImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                if let url = profileImageUrl {
+                    AsyncImage(url: url) { image in
+                        image.resizable()
+                    } placeholder: {
+                        ProgressView()
+                    }
                     .frame(width: 20, height: 20)
+                    .aspectRatio(contentMode: .fill)
                     .clipShape(Circle())
-                    .foregroundColor(.purple)
+                } else {
+                    Image(systemName: "person.fill")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .clipShape(Circle())
+                        .foregroundColor(.purple)
+                }
+
             }
             Text(username)
                 .font(.system(size: 12))
@@ -32,5 +43,5 @@ struct BlogPostItemViewHeaderView: View {
 }
 
 #Preview {
-    BlogPostItemViewHeaderView(username: "username", profileImage: "person")
+    BlogPostItemViewHeaderView(username: "username", profileImageUrl: nil)
 }

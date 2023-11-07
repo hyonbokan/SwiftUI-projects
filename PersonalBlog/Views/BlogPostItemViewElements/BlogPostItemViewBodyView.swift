@@ -9,18 +9,28 @@ import SwiftUI
 
 struct BlogPostItemViewBodyView: View {
     let title: String
-    let postImageName: String
+    let postImageUrlString: String
     
     var body: some View {
         HStack {
             Text(title)
                 .font(.system(size: 20))
             Spacer()
-            Image(systemName: postImageName)
-                .resizable()
+            if let url = URL(string: postImageUrlString) {
+                AsyncImage(url: url) { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 100, height: 80)
-                .foregroundColor(.purple)
+            } else {
+                Image(systemName: "photo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 80)
+                    .foregroundColor(.purple)
+            }
         }
         .frame(height: 80)
     }

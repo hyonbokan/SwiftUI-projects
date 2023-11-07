@@ -11,4 +11,5 @@ struct UserBlogPosts: Codable, Identifiable {
     let id: String
     let posts: [BlogPost]
     let owner: User
+    let userProfileImage: URL?
 }

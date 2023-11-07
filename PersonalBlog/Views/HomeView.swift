@@ -17,18 +17,13 @@ struct HomeView: View {
         NavigationView {
             VStack{
                 List(viewModel.userPosts, id: \.id) { userBlogPosts in
-
                         ForEach(userBlogPosts.posts, id: \.id) { post in
                             VStack(alignment: .leading) {
-                                // Header view for the blog post with user's name and profile image
-                                BlogPostItemViewHeaderView(username: userBlogPosts.owner.name, profileImage: "person.fill")
-                                // Body view for the blog post with title and post image
-                                BlogPostItemViewBodyView(title: post.title, postImageName: "photo.artframe")
-                                // Optionally, include a footer view if you have one
-                                // BlogPostItemViewFooterView(...)
+                                BlogPostItemViewHeaderView(username: userBlogPosts.owner.name, profileImageUrl: userBlogPosts.userProfileImage)
+                                BlogPostItemViewBodyView(title: post.title, postImageUrlString: post.postUrlString)
+                                BlogPostItemViewFooterView(timestamp: post.postedDate, likers: post.likers)
                             }
                         }
-
                 }
             }.onAppear {
                 if !viewModel.isDataFetched {

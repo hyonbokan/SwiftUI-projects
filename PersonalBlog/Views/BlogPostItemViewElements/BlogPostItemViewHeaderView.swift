@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BlogPostItemViewHomeViewHeaderView: View {
+struct BlogPostItemViewHeaderView: View {
     let username: String
     let profileImage: String
     
@@ -32,5 +32,5 @@ struct BlogPostItemViewHomeViewHeaderView: View {
 }
 
 #Preview {
-    BlogPostItemViewHomeViewHeaderView(username: "username", profileImage: "person")
+    BlogPostItemViewHeaderView(username: "username", profileImage: "person")
 }

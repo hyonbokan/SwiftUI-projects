@@ -17,7 +17,7 @@ struct MainView: View {
     @ViewBuilder
     var accountView: some View {
         TabView {
-            HomeView(userId: "Akagi").tabItem {
+            HomeView().tabItem {
                 Label("Home", systemImage: "house")
             }
             ProfileView().tabItem {

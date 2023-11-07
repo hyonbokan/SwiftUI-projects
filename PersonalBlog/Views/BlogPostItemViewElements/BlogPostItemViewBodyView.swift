@@ -20,6 +20,7 @@ struct BlogPostItemViewBodyView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 100, height: 80)
+                .foregroundColor(.purple)
         }
         .frame(height: 80)
     }

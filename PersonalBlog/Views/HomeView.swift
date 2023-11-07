@@ -9,20 +9,30 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var viewModel: HomeViewViewModel
-    @FirestoreQuery var items: [BlogPost]
-    @FirestoreQuery var users: [User]
-    
-    init(userId: String) {
-        self._viewModel = StateObject(wrappedValue: HomeViewViewModel(userId: userId))
-        self._items = FirestoreQuery(collectionPath: "users/\(userId)/posts")
-        self._users = FirestoreQuery(collectionPath: "users")
+    init() {
+        self._viewModel = StateObject(wrappedValue: HomeViewViewModel())
     }
     
     var body: some View {
         NavigationView {
             VStack{
-                List(items) { item in
-                    BlogPostItemView(user: User(id: "", name: "Sakuragi", email: "Sakuragi@gmail.com", profileImageUrl: "person"), item: BlogPost(id: "123", title: "Slam Dunk", postedDate: .date(from: Date()) ?? "", body: "body text", postUrlString: "123", likers: []))
+                List(viewModel.userPosts, id: \.id) { userBlogPosts in
+
+                        ForEach(userBlogPosts.posts, id: \.id) { post in
+                            VStack(alignment: .leading) {
+                                // Header view for the blog post with user's name and profile image
+                                BlogPostItemViewHeaderView(username: userBlogPosts.owner.name, profileImage: "person.fill")
+                                // Body view for the blog post with title and post image
+                                BlogPostItemViewBodyView(title: post.title, postImageName: "photo.artframe")
+                                // Optionally, include a footer view if you have one
+                                // BlogPostItemViewFooterView(...)
+                            }
+                        }
+
+                }
+            }.onAppear {
+                if !viewModel.isDataFetched {
+                    viewModel.fetchData()
                 }
             }
         }
@@ -31,6 +41,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(userId: "Akagi")
+        HomeView()
     }
 }

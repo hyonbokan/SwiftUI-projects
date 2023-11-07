@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct BlogPostItemViewFooterView: View {
-    let timestamp: Date
+    let timestamp: String
     let likers: [String]
     var body: some View {
         HStack {
-            let date = String.date(from: timestamp) ?? "None"
-            Text(date)
+//            let date = String.date(from: timestamp) ?? "None"
+//            Text(date)
+              Text(timestamp)
                  .font(.subheadline)
                  .foregroundColor(.gray)
              Spacer()
@@ -33,5 +34,5 @@ struct BlogPostItemViewFooterView: View {
 }
 
 #Preview {
-    BlogPostItemViewFooterView(timestamp: Date(), likers: [])
+    BlogPostItemViewFooterView(timestamp: "time stamp", likers: [])
 }

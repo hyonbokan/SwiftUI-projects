@@ -12,8 +12,6 @@ struct BlogPostItemViewFooterView: View {
     let likers: [String]
     var body: some View {
         HStack {
-//            let date = String.date(from: timestamp) ?? "None"
-//            Text(date)
               Text(timestamp)
                  .font(.subheadline)
                  .foregroundColor(.gray)
@@ -28,6 +26,7 @@ struct BlogPostItemViewFooterView: View {
              }
             Text("\(likers.count)")
                  .font(.subheadline)
+//                 .foregroundColor(.purple)
          }
          .frame(height: 30)
      }

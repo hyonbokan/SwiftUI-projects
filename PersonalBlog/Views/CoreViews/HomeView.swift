@@ -19,9 +19,10 @@ struct HomeView: View {
                 List(viewModel.userPosts, id: \.id) { userBlogPosts in
                         ForEach(userBlogPosts.posts, id: \.id) { post in
                             VStack(alignment: .leading) {
-                                BlogPostItemViewHeaderView(username: userBlogPosts.owner.name, profileImageUrl: userBlogPosts.userProfileImage)
-                                BlogPostItemViewBodyView(title: post.title, postImageUrlString: post.postUrlString)
-                                BlogPostItemViewFooterView(timestamp: post.postedDate, likers: post.likers)
+                                NavigationLink(destination: BlogPostItemDetailView(model: post, user: userBlogPosts.owner, userProfileImage: userBlogPosts.userProfileImage), label: {
+                                    BlogPostItemView(user: userBlogPosts.owner, userImageUrl: userBlogPosts.userProfileImage, item: post)
+                                })
+
                             }
                         }
                 }
@@ -31,6 +32,8 @@ struct HomeView: View {
                 }
             }
         }
+        .navigationTitle("Home")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

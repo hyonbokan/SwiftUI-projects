@@ -12,6 +12,7 @@ class HomeViewViewModel: ObservableObject {
     @Published var user: User? = nil
     @Published var userPosts: [UserBlogPosts] = []
     @Published var isDataFetched = false
+
     
     private let database = Firestore.firestore()
     
@@ -116,5 +117,4 @@ class HomeViewViewModel: ObservableObject {
             }
         }
     }
-    
 }

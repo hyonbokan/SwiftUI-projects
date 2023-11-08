@@ -1,6 +1,6 @@
 # SwiftUI-projects
 
-This repository contains a collection of projects built using SwiftUI. Each project showcases different features and functionalities implemented using SwiftUI. A repo with the same projects, but with UIKit is [here](https://github.com/hyonbokan/Swift-UIkit-Projects)
+This repository contains a collection of projects built using `SwiftUI`. Each project showcases different features and functionalities implemented using SwiftUI. A repo with the same projects, but with `UIKit` is [here](https://github.com/hyonbokan/Swift-UIkit-Projects)
 
 ## Projects
 
@@ -30,7 +30,7 @@ This repository contains a collection of projects built using SwiftUI. Each proj
 
 ### 2. Airbnb
 
-**Airbnb** offers a simplified version of the popular Airbnb platform. This project was designed to provide a hands-on learning experience, focusing on API integration, data modeling, and creating a user interface using SwiftUI.
+**Airbnb** offers a simplified version of the popular Airbnb platform. This project was designed to provide a hands-on learning experience, focusing on API integration, data modeling.
 
 #### Key Features:
 

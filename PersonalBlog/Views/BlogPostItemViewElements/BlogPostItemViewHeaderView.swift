@@ -13,9 +13,6 @@ struct BlogPostItemViewHeaderView: View {
     
     var body: some View {
         HStack {
-            Button(action: {
-                print("user tapped")
-            }) {
                 if let url = profileImageUrl {
                     AsyncImage(url: url) { image in
                         image.resizable()
@@ -32,8 +29,6 @@ struct BlogPostItemViewHeaderView: View {
                         .clipShape(Circle())
                         .foregroundColor(.purple)
                 }
-
-            }
             Text(username)
                 .font(.system(size: 12))
             Spacer()

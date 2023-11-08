@@ -37,5 +37,5 @@ struct BlogPostItemViewBodyView: View {
 }
 
 #Preview {
-    BlogPostItemViewBodyView(title: "Post title", postImageName: "photo.artframe")
+    BlogPostItemViewBodyView(title: "Post title", postImageUrlString: "photo.artframe")
 }

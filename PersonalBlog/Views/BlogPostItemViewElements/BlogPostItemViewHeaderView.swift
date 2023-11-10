@@ -37,6 +37,6 @@ struct BlogPostItemViewHeaderView: View {
     }
 }
 
-#Preview {
-    BlogPostItemViewHeaderView(username: "username", profileImageUrl: nil)
-}
+//#Preview {
+//    BlogPostItemViewHeaderView(username: "username", profileImageUrl: nil)
+//}

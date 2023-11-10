@@ -32,6 +32,6 @@ struct BlogPostItemViewFooterView: View {
      }
 }
 
-#Preview {
-    BlogPostItemViewFooterView(timestamp: "time stamp", likers: [])
-}
+//#Preview {
+//    BlogPostItemViewFooterView(timestamp: "time stamp", likers: [])
+//}

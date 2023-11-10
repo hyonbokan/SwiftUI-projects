@@ -36,6 +36,6 @@ struct BlogPostItemViewBodyView: View {
     }
 }
 
-#Preview {
-    BlogPostItemViewBodyView(title: "Post title", postImageUrlString: "photo.artframe")
-}
+//#Preview {
+//    BlogPostItemViewBodyView(title: "Post title", postImageUrlString: "photo.artframe")
+//}

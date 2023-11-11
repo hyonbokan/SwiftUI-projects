@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BlogPostItemDetailView: View {
     @StateObject var viewModel = BlogPostItemDetailViewModel()
+    @State var isLiked: Bool
     
     let model: BlogPost
     let user: User
@@ -30,7 +31,7 @@ struct BlogPostItemDetailView: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigation) {
                 Button(action: didTapLike) {
-                    Image(systemName: "basketball")
+                    Image(systemName: isLiked ? "basketball.fill" : "basketball")
                         .font(.system(size: 15))
                         .foregroundColor(.purple)
                 }
@@ -44,8 +45,8 @@ struct BlogPostItemDetailView: View {
     }
 
     func didTapLike() {
-        let isLiked = model.likers.contains("Akagi")
         print("\nIs post liked by Akagi: \(isLiked)")
+        isLiked.toggle()
         viewModel.likePost(state: isLiked ? .unlike : .like, postID: model.id, owner: user.name)
     }
     

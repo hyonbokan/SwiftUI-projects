@@ -10,11 +10,12 @@ import FirebaseFirestore
 
 class BlogPostItemDetailViewModel: ObservableObject {
     
+    init() {}
+    
     enum LikeState {
         case like, unlike
     }
-    
-    
+
     func likePost(
         state: LikeState,
         postID: String,

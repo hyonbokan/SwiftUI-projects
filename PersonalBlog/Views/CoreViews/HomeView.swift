@@ -19,7 +19,7 @@ struct HomeView: View {
                 List(viewModel.userPosts, id: \.id) { userBlogPosts in
                         ForEach(userBlogPosts.posts, id: \.id) { post in
                             VStack(alignment: .leading) {
-                                NavigationLink(destination: BlogPostItemDetailView(model: post, user: userBlogPosts.owner, userProfileImage: userBlogPosts.userProfileImage), label: {
+                                NavigationLink(destination: BlogPostItemDetailView(isLiked: post.likers.contains("Akagi"), model: post, user: userBlogPosts.owner, userProfileImage: userBlogPosts.userProfileImage), label: {
                                     BlogPostItemView(user: userBlogPosts.owner, userImageUrl: userBlogPosts.userProfileImage, item: post)
                                 })
 
@@ -31,9 +31,9 @@ struct HomeView: View {
                     viewModel.fetchData()
                 }
             }
+            .navigationTitle("Home")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationTitle("Home")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

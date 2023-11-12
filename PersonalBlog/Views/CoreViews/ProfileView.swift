@@ -19,9 +19,21 @@ struct ProfileView: View {
     var body: some View {
         // Create top view for the profile pic and name
         ScrollView {
+            
+            VStack(alignment: .center) {
+                Image(systemName: "person")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 100, height: 100)
+                    .clipShape(Circle())
+                    .padding()
+            }
+            Spacer()
+            
             LazyVGrid(columns: columns, spacing: 15) {
                 ForEach(blogPosts, id: \.id) { post in
                     // Create View for the bottom
+                    ProfilePostView(viewModel: post)
                 }
             }
             .onAppear{
@@ -35,6 +47,7 @@ struct ProfileView: View {
                     }
                 })
             }
+            .padding()
         }
     }
 }

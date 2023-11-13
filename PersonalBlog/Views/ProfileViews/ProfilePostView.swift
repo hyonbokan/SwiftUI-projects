@@ -11,21 +11,26 @@ struct ProfilePostView: View {
     let viewModel: BlogPost
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .center) {
             if let imageUrl = URL(string: viewModel.postUrlString) {
                 AsyncImage(url: imageUrl) { image in
                     image.resizable()
                 } placeholder: {
-                    ProfileView()
+                    ProgressView()
                 }
                 .aspectRatio(contentMode: .fill)
-                .frame(height: 150)
-                .clipped()
+                .frame(width: 170, height: 90)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
             }
             Text(viewModel.title)
                 .font(.subheadline)
-                .padding([.horizontal, .top])
+                .bold()
+//                .foregroundStyle(.primary)
+                .frame(width: 170, height: 20)
         }
+        .background(RoundedRectangle(cornerRadius: 20).stroke(Color.purple, lineWidth: 3))
+        .frame(width: 170)
+        .clipped()
     }
 }
 

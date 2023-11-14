@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewViewModel()
-    @State private var blogPosts: [BlogPost] = []
     
     let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 16),
@@ -17,17 +16,16 @@ struct ProfileView: View {
     ]
     
     var body: some View {
-        // Create top view for the profile pic and name
         NavigationView {
             ScrollView {
-                profileHeader(username: viewModel.currentUser?.name ?? "None", profileImageUrl: viewModel.profileImageUrl)
+                profileHeader(username: "Akagi", profileImageUrl: viewModel.profileImageUrl)
                 
                 Spacer()
                 
                 LazyVGrid(columns: columns, spacing: 15) {
-                    ForEach(blogPosts, id: \.id) { post in
+                    ForEach(viewModel.posts, id: \.id) { post in
                         NavigationLink {
-                            BlogPostItemDetailView(isLiked: false, model: post, user: User(name: "Akagi", email: "Akagi_gori@gmail.com"), userProfileImage: viewModel.profileImageUrl)
+                            BlogPostItemDetailView(isLiked: post.likers.contains("Akagi"), model: post, user: viewModel.user ?? User(name: "None", email: "None"), userProfileImage: viewModel.profileImageUrl)
                         } label: {
                             ProfilePostView(viewModel: post)
                         }
@@ -45,18 +43,7 @@ struct ProfileView: View {
             
         }
         .onAppear{
-            viewModel.fetchUserData(username: "Akagi")
-            guard let username = viewModel.currentUser?.name else { return }
-            viewModel.getPosts(username: username, completion: { result in
-                switch result {
-                case .success(let posts):
-                    self.blogPosts = posts
-                    print(posts)
-                case .failure(let error):
-                    print(error)
-                }
-            })
-            viewModel.getUserProfileImageUrl()
+            viewModel.fetchProfileData(username: "Akagi")
         }
     }
     

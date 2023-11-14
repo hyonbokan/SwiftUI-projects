@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E887C2E2B031D7C00D208DD /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E887C2D2B031D7C00D208DD /* SignInView.swift */; };
+		9E887C302B031D8600D208DD /* SingUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E887C2F2B031D8600D208DD /* SingUpView.swift */; };
 		9EB6D76E2AF8727F00ED214C /* PersonalBlogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB6D76D2AF8727F00ED214C /* PersonalBlogApp.swift */; };
 		9EB6D7702AF8727F00ED214C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB6D76F2AF8727F00ED214C /* MainView.swift */; };
 		9EB6D7722AF8728000ED214C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EB6D7712AF8728000ED214C /* Assets.xcassets */; };
@@ -40,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E887C2D2B031D7C00D208DD /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		9E887C2F2B031D8600D208DD /* SingUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpView.swift; sourceTree = "<group>"; };
 		9EB6D76A2AF8727F00ED214C /* PersonalBlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonalBlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EB6D76D2AF8727F00ED214C /* PersonalBlogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalBlogApp.swift; sourceTree = "<group>"; };
 		9EB6D76F2AF8727F00ED214C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -84,6 +88,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E887C2C2B031D6800D208DD /* OnboardViews */ = {
+			isa = PBXGroup;
+			children = (
+				9E887C2D2B031D7C00D208DD /* SignInView.swift */,
+				9E887C2F2B031D8600D208DD /* SingUpView.swift */,
+			);
+			path = OnboardViews;
+			sourceTree = "<group>";
+		};
 		9EB6D7612AF8727F00ED214C = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +169,7 @@
 		9EB6D7BD2AF8789100ED214C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9E887C2C2B031D6800D208DD /* OnboardViews */,
 				BD50BDD62B008A5D005250DB /* ProfileViews */,
 				9EB6D7D42AF8C53200ED214C /* CoreViews */,
 				9EB6D7D22AF8C50B00ED214C /* BlogPostItemViewElements */,
@@ -278,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E887C302B031D8600D208DD /* SingUpView.swift in Sources */,
 				9EB6D7CF2AF8BEB400ED214C /* BlogPostItemView.swift in Sources */,
 				9EB6D7D82AF8C5DF00ED214C /* BlogPostItemViewBodyView.swift in Sources */,
 				9EB6D7DC2AF9E0C100ED214C /* UserBlogPosts.swift in Sources */,
@@ -288,6 +303,7 @@
 				9EB6D7C92AF87CDD00ED214C /* HomeView.swift in Sources */,
 				9EB6D7702AF8727F00ED214C /* MainView.swift in Sources */,
 				9EB6D7C52AF87AF200ED214C /* MainViewViewModel.swift in Sources */,
+				9E887C2E2B031D7C00D208DD /* SignInView.swift in Sources */,
 				9EB6D76E2AF8727F00ED214C /* PersonalBlogApp.swift in Sources */,
 				9EB6D7E42AFC940E00ED214C /* BlogPostItemDetailViewModel.swift in Sources */,
 				9EB6D7DA2AF8C63700ED214C /* BlogPostItemViewFooterView.swift in Sources */,

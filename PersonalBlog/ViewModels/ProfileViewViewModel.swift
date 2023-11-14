@@ -6,6 +6,7 @@
 //
 import FirebaseStorage
 import FirebaseFirestore
+import FirebaseAuth
 import Foundation
 
 class ProfileViewViewModel : ObservableObject {
@@ -27,20 +28,20 @@ class ProfileViewViewModel : ObservableObject {
         
         dispatchGroup.enter()
         getUserData(username: username) { fetchedUser in
+            defer { dispatchGroup.leave() }
             user = fetchedUser
-            dispatchGroup.leave()
         }
         
         dispatchGroup.enter()
         getUserProfileImageUrl(username: username) { url in
+            defer { dispatchGroup.leave() }
             profileImageUrl = url
-            dispatchGroup.leave()
         }
         
         dispatchGroup.enter()
         getPosts(username: username) { fetchedPosts in
+            defer { dispatchGroup.leave() }
             posts = fetchedPosts
-            dispatchGroup.leave()
         }
         
         dispatchGroup.notify(queue: .main) { [weak self] in
@@ -104,6 +105,10 @@ class ProfileViewViewModel : ObservableObject {
     }
     
     public func signOut() {
-        print("sign out")
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print(error)
+        }
     }
 }

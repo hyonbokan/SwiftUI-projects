@@ -96,10 +96,6 @@ class ProfileViewViewModel : ObservableObject {
     
     public func getUserProfileImageUrl(username: String, completion: @escaping (URL?) -> Void) {
         storage.child("\(username)/profile_picture.png").downloadURL { url, error in
-//            guard let profileImageUrl = url else {
-//                print("Could get \(username) profile image")
-//                return
-//            }
             completion(url)
         }
     }
@@ -107,6 +103,8 @@ class ProfileViewViewModel : ObservableObject {
     public func signOut() {
         do {
             try Auth.auth().signOut()
+            UserDefaults.standard.set("", forKey: "username")
+            UserDefaults.standard.set("", forKey: "email")
         } catch {
             print(error)
         }

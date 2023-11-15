@@ -74,7 +74,7 @@ struct BlogPostItemDetailView: View {
                 case .failure:
                     Color.red
                 case .empty:
-                    ProfileView()
+                    Image(systemName: "person")
                 @unknown default:
                     EmptyView()
                 }

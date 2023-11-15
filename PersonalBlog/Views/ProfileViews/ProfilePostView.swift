@@ -19,17 +19,19 @@ struct ProfilePostView: View {
                     ProgressView()
                 }
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 170, height: 90)
+                .frame(width: 160, height: 90)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             }
             Text(viewModel.title)
-                .font(.subheadline)
+                .font(.caption)
                 .bold()
-//                .foregroundStyle(.primary)
-                .frame(width: 170, height: 20)
+                .foregroundStyle(Color(UIColor.label))
+//                .fixedSize(horizontal: false, vertical: true)
+                .frame(width: 150, height: 15)
+                .lineLimit(0)
         }
         .background(RoundedRectangle(cornerRadius: 20).stroke(Color.purple, lineWidth: 3))
-        .frame(width: 170)
+        .frame(width: 180, height: 120)
         .clipped()
     }
 }

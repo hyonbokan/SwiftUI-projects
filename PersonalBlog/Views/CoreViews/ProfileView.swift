@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewViewModel()
+    let currentUser: String
     
     let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 16),
@@ -18,14 +19,14 @@ struct ProfileView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                profileHeader(username: "Akagi", profileImageUrl: viewModel.profileImageUrl)
+                profileHeader(username: currentUser, profileImageUrl: viewModel.profileImageUrl)
                 
                 Spacer()
                 
                 LazyVGrid(columns: columns, spacing: 15) {
                     ForEach(viewModel.posts, id: \.id) { post in
                         NavigationLink {
-                            BlogPostItemDetailView(isLiked: post.likers.contains("Akagi"), model: post, user: viewModel.user ?? User(name: "None", email: "None"), userProfileImage: viewModel.profileImageUrl)
+                            BlogPostItemDetailView(isLiked: post.likers.contains(currentUser), model: post, user: viewModel.user ?? User(name: "None", email: "None"), userProfileImage: viewModel.profileImageUrl)
                         } label: {
                             ProfilePostView(viewModel: post)
                         }
@@ -43,7 +44,8 @@ struct ProfileView: View {
             
         }
         .onAppear{
-            viewModel.fetchProfileData(username: "Akagi")
+            guard let currentUser = UserDefaults.standard.string(forKey: "username") else { return }
+            viewModel.fetchProfileData(username: currentUser)
         }
     }
     

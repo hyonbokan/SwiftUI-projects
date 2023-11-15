@@ -13,19 +13,19 @@ struct MainView: View {
     var body: some View {
         if viewModel.isSignedIn,
            !viewModel.currentUser.isEmpty {
-            accountView
+            accountView(currentUser: UserDefaults.standard.string(forKey: "username") ?? "None")
         } else {
             SignInView()
         }
     }
     
     @ViewBuilder
-    var accountView: some View {
+    func accountView(currentUser: String) -> some View {
         TabView {
-            HomeView().tabItem {
+            HomeView(currentUser: currentUser).tabItem {
                 Label("Home", systemImage: "house")
             }
-            ProfileView().tabItem {
+            ProfileView(currentUser: currentUser).tabItem {
                 Label("Profile", systemImage: "person")
             }
         }

@@ -10,6 +10,8 @@ import SwiftUI
 struct BlogPostItemViewFooterView: View {
     let timestamp: String
     let likers: [String]
+    let isLiked: Bool
+    
     var body: some View {
         HStack {
               Text(timestamp)
@@ -19,7 +21,7 @@ struct BlogPostItemViewFooterView: View {
              Button(action: {
                  // Action for like button
              }) {
-                 Image(systemName: "basketball")
+                 Image(systemName: isLiked ? "basketball.fill" : "basketball")
                      .resizable()
                      .frame(width: 18, height: 18)
                      .foregroundColor(.purple)

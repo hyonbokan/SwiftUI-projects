@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignInView: View {
-    @StateObject var viewModel = LogInViewViewModel()
+    @StateObject var viewModel = SignInViewViewModel()
     
     var body: some View {
         VStack {
@@ -40,13 +40,19 @@ struct SignInView: View {
                     viewModel.login()
                 }
                 
-                NavigationLink(destination: SignUpView()) {
-                               Text("Create Account")
-                                   .foregroundColor(.purple)
-                                   .frame(maxWidth: .infinity) // Use maximum width to allow for center alignment
-                }
-                .buttonStyle(PlainButtonStyle())
-                .padding()
+                ZStack(alignment: .center) {
+                    NavigationLink(destination: SignUpView()) {
+                        EmptyView()
+                    }
+                    .opacity(0)
+                    .buttonStyle(PlainButtonStyle())
+                    
+                    Text("Create Account")
+                        .bold()
+                        .foregroundStyle(.purple)
+                        .offset(x: 10)
+                }.padding()
+
             }
             .alert(isPresented: $viewModel.showAlert) {
                 Alert(title: Text("Error"), message: (Text("Can't log in. Please check if email and password are correct")))

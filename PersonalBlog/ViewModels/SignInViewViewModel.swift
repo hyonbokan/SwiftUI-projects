@@ -8,7 +8,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import Foundation
 
-class LogInViewViewModel: ObservableObject {
+class SignInViewViewModel: ObservableObject {
     @Published var currentUser: String = ""
     @Published var email = ""
     @Published var password = ""

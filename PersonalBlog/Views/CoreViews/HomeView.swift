@@ -22,13 +22,17 @@ struct HomeView: View {
                 List(viewModel.userPosts, id: \.id) { userBlogPosts in
                         ForEach(userBlogPosts.posts, id: \.id) { post in
                             VStack(alignment: .leading) {
-                                NavigationLink(destination: BlogPostItemDetailView(isLiked: post.likers.contains(currentUser), model: post, user: userBlogPosts.owner, userProfileImage: userBlogPosts.userProfileImage), label: {
-                                    BlogPostItemView(user: userBlogPosts.owner, userImageUrl: userBlogPosts.userProfileImage, item: post, isLiked: post.likers.contains(currentUser))
-                                })
-
+                                NavigationLink(destination: BlogPostItemDetailView(isLiked: post.likers.contains(currentUser), model: post, user: userBlogPosts.owner, userProfileImage: userBlogPosts.userProfileImage)) {
+                                    BlogPostItemView(user: userBlogPosts.owner, userImageUrl: userBlogPosts.userProfileImage, item: post, isLiked: post.likers.contains(currentUser)
+                                    )
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                .accentColor(.clear)
                             }
+
                         }
                 }
+                .listStyle(PlainListStyle())
             }.onAppear {
                 if !viewModel.isDataFetched {
                     viewModel.fetchData()

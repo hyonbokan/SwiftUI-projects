@@ -25,7 +25,7 @@ struct MainView: View {
             HomeView(currentUser: currentUser).tabItem {
                 Label("Home", systemImage: "house")
             }
-            ProfileView(currentUser: currentUser).tabItem {
+            ProfileView(username: currentUser, isCurrentUser: true).tabItem {
                 Label("Profile", systemImage: "person")
             }
         }

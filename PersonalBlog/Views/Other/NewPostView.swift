@@ -57,11 +57,17 @@ struct NewPostView: View {
                 
                 TextField("Title for the post", text: $viewModel.title)
                     .textFieldStyle(DefaultTextFieldStyle())
+//                    .frame(height: 50)
                 
                 TextEditor(text: $viewModel.text)
                     .textFieldStyle(DefaultTextFieldStyle())
-                    .frame(height: 250)
+                    .frame(height: 300)
                 
+                OnboardButton(title: "Post", background: .purple) {
+                    viewModel.createPost()
+                    newItemPresented = false
+                }
+                .padding()
             }
         }
     }

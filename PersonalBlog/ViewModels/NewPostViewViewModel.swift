@@ -14,30 +14,12 @@ import _PhotosUI_SwiftUI
 class NewPostViewViewModel: ObservableObject {
     @Published var selectedItems: [PhotosPickerItem] = []
     @Published var data: Data?
-    @Published var image: UIImage?
     @Published var title: String = ""
     @Published var text: String = ""
     
     private let database = Firestore.firestore()
 
     private let storage = Storage.storage().reference()
-    
-    public func uploadPost(
-        data: Data?,
-        id: String,
-        completion: @escaping (URL?) -> Void
-    ) {
-        guard let username = UserDefaults.standard.string(forKey: "username"), let data = data else {
-            print("Storage: Could not get username from User Defaults")
-            return
-        }
-        let ref = storage.child("\(username)/posts/\(id).png")
-        ref.putData(data, metadata: nil) { _, error in
-            ref.downloadURL { url, _ in
-                completion(url)
-            }
-        }
-    }
     
     public func createPost() {
         let timeStamp = Date().timeIntervalSince1970
@@ -51,24 +33,65 @@ class NewPostViewViewModel: ObservableObject {
             return
         }
         let id = "\(username)_\(randomNumber)_\(timeStamp)"
+        // create func for imageUrl
+        // create func for save post data
         let storageRef = storage.child("\(username)/posts/\(id).png")
-        var postImageUrlString = ""
-        if let postImageData = image?.pngData() {
-            storageRef.putData(postImageData) { _, _ in
+        
+        if let postImageData = data {
+            storageRef.putData(postImageData) {[weak self] _, _ in
                 storageRef.downloadURL { url, error in
                     guard let downloadURL = url else {
                         print("Error getting download URL: \(error?.localizedDescription ?? "unknown error")")
                         return
                     }
-                    postImageUrlString = downloadURL.absoluteString
+//                    postImageUrlString = downloadURL.absoluteString
+                    let newPost = BlogPost(id: "\(id)", title: self?.title ?? "", postedDate: stringDate, body: self?.text ?? "", postUrlString: downloadURL.absoluteString, likers: [])
+                    print(newPost)
+                    let dbRef = self?.database.document("users/\(username)/posts/\(newPost.id)")
+                    guard let newPostData = newPost.asDictionary() else {
+                        print("Could not encode the post data into dict")
+                        return
+                    }
+                    dbRef?.setData(newPostData)
+                    print("New Post Created")
+                    
                 }
             }
+        } else {
+            let newPost = BlogPost(id: "\(id)", title: title, postedDate: stringDate, body: text, postUrlString: "", likers: [])
+            print(newPost)
+            let dbRef = database.document("users/\(username)/posts/\(newPost.id)")
+            guard let newPostData = newPost.asDictionary() else {
+                print("Could not encode the post data into dict")
+                return
+            }
+            dbRef.setData(newPostData)
+            print("New Post Created")
         }
-        
-        
-        let newPost = BlogPost(id: "\(id)", title: title, postedDate: stringDate, body: text, postUrlString: postImageUrlString, likers: [])
-        print(newPost)
-        
-        let dbRef = database.document("users/\(username)/posts/")
+
+    }
+    
+    private func createBlogPost(id: String, imageUrl: String) -> BlogPost {
+        return BlogPost(id: id,
+                        title: title,
+                        postedDate: String.date(from: Date()) ?? "",
+                        body: text,
+                        postUrlString: imageUrl,
+                        likers: [])
+    }
+    
+    private func savePost(_ blogPost: BlogPost, username: String) {
+        let dbRef = database.document("users/\(username)/posts/\(blogPost.id)")
+        guard let blogPostData = blogPost.asDictionary() else {
+            print("Could not encode the post data into dict")
+            return
+        }
+        dbRef.setData(blogPostData) { error in
+            if let error = error {
+                print("Error writing document: \(error)")
+            } else {
+                print("New Post Created")
+            }
+        }
     }
 }

@@ -27,8 +27,8 @@ struct OnboardButton: View {
     }
 }
 
-#Preview {
-    OnboardButton(title: "Title", background: .purple) {
-        
-    }
-}
+//#Preview {
+//    OnboardButton(title: "Title", background: .purple) {
+//        
+//    }
+//}

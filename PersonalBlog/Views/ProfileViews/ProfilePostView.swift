@@ -21,6 +21,11 @@ struct ProfilePostView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 160, height: 90)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
+            } else {
+                Image(systemName: "photo")
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 160, height: 90)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
             }
             Text(viewModel.title)
                 .font(.caption)

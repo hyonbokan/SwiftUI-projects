@@ -8,7 +8,6 @@ import PhotosUI
 import SwiftUI
 
 struct NewPostView: View {
-//    @State var selectedItems: [PhotosPickerItem] = []
     @StateObject var viewModel = NewPostViewViewModel()
     @Binding var newItemPresented: Bool
     
@@ -40,24 +39,23 @@ struct NewPostView: View {
                                      return
                                  }
                                  item.loadTransferable(type: Data.self) { result in
-                                    switch result {
-                                    case .success(let data):
-                                        if let data = data {
-                                            DispatchQueue.main.async {
-                                                viewModel?.data = data
-                                            }
-                                        } else {
-                                            print("Data is nil")
-                                        }
-                                    case .failure(let error):
-                                        fatalError("\(error)")
+                                     switch result {
+                                     case .success(let data):
+                                         if let data = data {
+                                             DispatchQueue.main.async {
+                                                 viewModel?.data = data
+                                             }
+                                         } else {
+                                             print("Data is nil")
+                                         }
+                                     case .failure(let error):
+                                         fatalError("\(error)")
                                      }
                                  }
                              }
                 
                 TextField("Title for the post", text: $viewModel.title)
                     .textFieldStyle(DefaultTextFieldStyle())
-//                    .frame(height: 50)
                 
                 TextEditor(text: $viewModel.text)
                     .textFieldStyle(DefaultTextFieldStyle())
@@ -73,10 +71,10 @@ struct NewPostView: View {
     }
 }
 
-#Preview {
-    NewPostView(newItemPresented: Binding(get: {
-        return true
-    }, set: { _ in
-        
-    }))
-}
+//#Preview {
+//    NewPostView(newItemPresented: Binding(get: {
+//        return true
+//    }, set: { _ in
+//        
+//    }))
+//}

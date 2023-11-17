@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct BlogPostItemDetailView: View {
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel = BlogPostItemDetailViewModel()
     @State var isLiked: Bool
     
     let model: BlogPost
     let user: User
     let userProfileImage: URL?
+    
     var body: some View {
         VStack(alignment: .leading) {
             ScrollView(.vertical) {
@@ -40,6 +42,14 @@ struct BlogPostItemDetailView: View {
                         .font(.system(size: 15))
                         .foregroundColor(.purple)
                 }
+                
+                if checkCurrentUser() {
+                    Button(action: didTapDelete) {
+                        Image(systemName: "trash")
+                            .font(.system(size: 15))
+                            .foregroundColor(.purple)
+                    }
+                }
             }
         }
     }
@@ -48,6 +58,11 @@ struct BlogPostItemDetailView: View {
         print("\nIs post liked by the user: \(isLiked)")
         isLiked.toggle()
         viewModel.likePost(state: isLiked ? .like : .unlike , postID: model.id, owner: user.name)
+    }
+    
+    func didTapDelete() {
+        viewModel.deletePost(postId: model.id)
+        presentationMode.wrappedValue.dismiss()
     }
     
     @ViewBuilder
@@ -107,27 +122,8 @@ struct BlogPostItemDetailView: View {
         .padding(.horizontal)
     }
     
-    @ViewBuilder
-    func actionButtons() -> some View {
-        HStack {
-            Button(action: didTapLike) {
-                Image(systemName: "basketball")
-                    .font(.system(size: 20))
-                    .foregroundColor(.purple)
-            }
-            .frame(width: 50, height: 40)
-            
-            Button(action: didTapLike) {
-                Image(systemName: "paperplane")
-                    .font(.system(size: 20))
-                    .foregroundColor(.purple)
-            }
-            .frame(width: 50, height: 40)
-        }
-        .background(Color(UIColor.systemBackground))
-        .cornerRadius(20)
-        .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.purple, lineWidth: 1)
-        )
-        Spacer()
+    func checkCurrentUser() -> Bool {
+        guard let currentUser = UserDefaults.standard.string(forKey: "username") else { return false}
+        return currentUser == user.name
     }
 }

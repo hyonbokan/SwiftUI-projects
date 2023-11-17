@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseStorage
 
 class BlogPostItemDetailViewModel: ObservableObject {
     
@@ -73,8 +74,28 @@ class BlogPostItemDetailViewModel: ObservableObject {
                 completion(nil)
                 return
             }
-//            print("\npost data: \(data)")
             completion(BlogPost(with: data))
+        }
+    }
+    
+    public func deletePost(postId: String) {
+        guard let currentUsername = UserDefaults.standard.string(forKey: "username") else { return }
+        let firebaseRef = Firestore.firestore()
+            .collection("users")
+            .document(currentUsername)
+            .collection("posts")
+            .document(postId)
+        
+        let storageRef = Storage.storage().reference()
+            .child("\(currentUsername)/posts/\(postId)")
+        
+        firebaseRef.delete()
+        storageRef.delete { error in
+            if let error = error {
+                print("the post image is not stored in the storage")
+            } else {
+                print("post deleted from storage")
+            }
         }
     }
 }

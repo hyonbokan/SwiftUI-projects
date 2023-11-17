@@ -8,11 +8,14 @@ import FirebaseStorage
 import FirebaseFirestore
 import FirebaseAuth
 import Foundation
+import _PhotosUI_SwiftUI
 
 class ProfileViewViewModel : ObservableObject {
     @Published var user: User?
     @Published var posts: [BlogPost] = []
     @Published var profileImageUrl: URL?
+    @Published var selectedItems: [PhotosPickerItem] = []
+    @Published var data: Data?
     
     init() {}
     private let database = Firestore.firestore()
@@ -98,6 +101,14 @@ class ProfileViewViewModel : ObservableObject {
         storage.child("\(username)/profile_picture.png").downloadURL { url, error in
             completion(url)
         }
+    }
+    
+    public func uploadProfileImage() {
+        guard let username = UserDefaults.standard.string(forKey: "username"), let data = data else {
+            print("Username was not found in cache or the image data is nil")
+            return
+        }
+        storage.child("\(username)/profile_picture.png").putData(data, metadata: nil)
     }
     
     public func signOut() {

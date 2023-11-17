@@ -11,9 +11,8 @@ import Foundation
 class HomeViewViewModel: ObservableObject {
     @Published var user: User? = nil
     @Published var userPosts: [UserBlogPosts] = []
-    @Published var isDataFetched = false
+//    @Published var isDataFetched = false
     @Published var showingNewPostView = false
-
     
     private let database = Firestore.firestore()
     
@@ -83,10 +82,10 @@ class HomeViewViewModel: ObservableObject {
     }
     
     func fetchData() {
-        guard !isDataFetched else {
-            return
-        }
-        isDataFetched = true
+//        guard !isDataFetched else {
+//            return
+//        }
+//        isDataFetched = true
         findAllUsers { [weak self] users in
             let group = DispatchGroup()
             for user in users {

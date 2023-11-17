@@ -22,9 +22,6 @@ struct HomeView: View {
             VStack{
                 List(viewModel.userPosts, id: \.id) { userBlogPosts in
                         ForEach(userBlogPosts.posts, id: \.id) { post in
-//                            if post.likers.contains(currentUser) != isLiked {
-//                                isLiked = !isLiked
-//                            }
                             VStack(alignment: .leading) {
                                 NavigationLink(destination: BlogPostItemDetailView(isLiked: post.likers.contains(currentUser), model: post, user: userBlogPosts.owner, userProfileImage: userBlogPosts.userProfileImage)) {
                                     BlogPostItemView(user: userBlogPosts.owner, userImageUrl: userBlogPosts.userProfileImage, item: post, isLiked: post.likers.contains(currentUser)
@@ -38,10 +35,12 @@ struct HomeView: View {
                 }
                 .listStyle(PlainListStyle())
             }.onAppear {
+                viewModel.userPosts = []
+                viewModel.user = nil
+                viewModel.fetchData()
 //                if !viewModel.isDataFetched {
 //                    viewModel.fetchData()
 //                }
-                viewModel.fetchData()
             }
             .navigationTitle("Home")
             .toolbar {

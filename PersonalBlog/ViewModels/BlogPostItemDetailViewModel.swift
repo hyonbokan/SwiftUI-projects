@@ -21,12 +21,12 @@ class BlogPostItemDetailViewModel: ObservableObject {
         postID: String,
         owner: String
     ) {
-//        guard let currentUsername = UserDefaults.standard.string(forKey: "username")
-//        else {
-//            print("\nCould not access current user\n")
-//            return
-//        }
-        let currentUsername = "Akagi"
+        guard let currentUsername = UserDefaults.standard.string(forKey: "username")
+        else {
+            print("\nCould not access current user\n")
+            return
+        }
+//        let currentUsername = "Akagi"
         let ref = Firestore.firestore()
             .collection("users")
             .document(owner)

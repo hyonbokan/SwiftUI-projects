@@ -45,9 +45,9 @@ struct BlogPostItemDetailView: View {
     }
 
     func didTapLike() {
-        print("\nIs post liked by Akagi: \(isLiked)")
+        print("\nIs post liked by the user: \(isLiked)")
         isLiked.toggle()
-        viewModel.likePost(state: isLiked ? .unlike : .like, postID: model.id, owner: user.name)
+        viewModel.likePost(state: isLiked ? .like : .unlike , postID: model.id, owner: user.name)
     }
     
     @ViewBuilder

@@ -18,7 +18,7 @@ class NewPostViewViewModel: ObservableObject {
     @Published var text: String = ""
     
     private let database = Firestore.firestore()
-
+    
     private let storage = Storage.storage().reference()
     
     public func createPost() {
@@ -34,41 +34,21 @@ class NewPostViewViewModel: ObservableObject {
         }
         let id = "\(username)_\(randomNumber)_\(timeStamp)"
         // create func for imageUrl
-        // create func for save post data
-        let storageRef = storage.child("\(username)/posts/\(id).png")
-        
-        if let postImageData = data {
-            storageRef.putData(postImageData) {[weak self] _, _ in
-                storageRef.downloadURL { url, error in
-                    guard let downloadURL = url else {
-                        print("Error getting download URL: \(error?.localizedDescription ?? "unknown error")")
-                        return
-                    }
-//                    postImageUrlString = downloadURL.absoluteString
-                    let newPost = BlogPost(id: "\(id)", title: self?.title ?? "", postedDate: stringDate, body: self?.text ?? "", postUrlString: downloadURL.absoluteString, likers: [])
-                    print(newPost)
-                    let dbRef = self?.database.document("users/\(username)/posts/\(newPost.id)")
-                    guard let newPostData = newPost.asDictionary() else {
-                        print("Could not encode the post data into dict")
-                        return
-                    }
-                    dbRef?.setData(newPostData)
-                    print("New Post Created")
-                    
+        if let imageData = data {
+            createImageUrl(imageData: imageData, userId: id) {[weak self] url in
+                let url = url
+                guard let newPost = self?.createBlogPost(id: id, imageUrl: url.absoluteString) else {
+                    print("Could not create a new post")
+                    return
                 }
+                self?.savePost(newPost, username: username)
+                print(newPost)
             }
         } else {
-            let newPost = BlogPost(id: "\(id)", title: title, postedDate: stringDate, body: text, postUrlString: "", likers: [])
+            let newPost = BlogPost(id: id, title: title, postedDate: stringDate, body: text, postUrlString: "", likers: [])
+            savePost(newPost, username: username)
             print(newPost)
-            let dbRef = database.document("users/\(username)/posts/\(newPost.id)")
-            guard let newPostData = newPost.asDictionary() else {
-                print("Could not encode the post data into dict")
-                return
-            }
-            dbRef.setData(newPostData)
-            print("New Post Created")
         }
-
     }
     
     private func createBlogPost(id: String, imageUrl: String) -> BlogPost {
@@ -91,6 +71,24 @@ class NewPostViewViewModel: ObservableObject {
                 print("Error writing document: \(error)")
             } else {
                 print("New Post Created")
+            }
+        }
+    }
+    
+    private func createImageUrl(imageData: Data, userId: String, completion: @escaping (URL) -> Void
+    ) {
+        guard let username = UserDefaults.standard.string(forKey: "username") else {
+            print("Could not find the user in UserDefaults")
+            return
+        }
+        let storageRef = storage.child("\(username)/posts/\(userId).png")
+        storageRef.putData(imageData) {_, _ in
+            storageRef.downloadURL { url, error in
+                guard let downloadURL = url else {
+                    print("Error getting download URL: \(error?.localizedDescription ?? "unknown error")")
+                    return
+                }
+                completion(downloadURL)
             }
         }
     }

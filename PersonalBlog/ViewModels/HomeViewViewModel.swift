@@ -11,7 +11,7 @@ import Foundation
 class HomeViewViewModel: ObservableObject {
     @Published var user: User? = nil
     @Published var userPosts: [UserBlogPosts] = []
-//    @Published var isDataFetched = false
+    @Published var isDataFetched = false
     @Published var showingNewPostView = false
     
     private let database = Firestore.firestore()

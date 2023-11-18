@@ -8,7 +8,8 @@ import FirebaseAuth
 import Foundation
 
 class MainViewViewModel: ObservableObject {
-    @Published var currentUser: String = ""
+    @Published var username: String = ""
+    @Published var currentUser: String = UserDefaults.standard.string(forKey: "username") ?? "User"
     
     private let auth = Auth.auth()
     
@@ -17,7 +18,7 @@ class MainViewViewModel: ObservableObject {
     init() {
         self.handler = Auth.auth().addStateDidChangeListener({ [weak self] _, user in
             DispatchQueue.main.async {
-                self?.currentUser = user?.uid ?? ""
+                self?.username = user?.email ?? ""
             }
         })
     }

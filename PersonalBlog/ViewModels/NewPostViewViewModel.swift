@@ -21,13 +21,9 @@ class NewPostViewViewModel: ObservableObject {
     
     private let storage = Storage.storage().reference()
     
-    public func createPost() {
+    public func createPost(username: String) {
         let timeStamp = Date().timeIntervalSince1970
         let randomNumber = Int.random(in: 0...1000)
-        guard let username = UserDefaults.standard.string(forKey: "username") else {
-            print("Could not find the user in UserDefaults")
-            return
-        }
         guard let stringDate = String.date(from: Date())
         else {
             print("Could not convert the date")
@@ -36,36 +32,26 @@ class NewPostViewViewModel: ObservableObject {
         let id = "\(username)_\(randomNumber)_\(timeStamp)"
         let title = self.title
         let text = self.text
-//        var urlString = ""
-        if let imageData = data {
-            createImageUrl(username: username, imageData: imageData, userId: id) { [weak self] url in
-//                urlString = url.absoluteString
-                let newPost = BlogPost(
-                    id: id,
-                    title: title,
-                    postedDate: stringDate,
-                    body: text,
-                    postUrlString: url.absoluteString,
-                    likers: []
-                )
-                self?.savePost(newPost, username: username)
+        
+        var newPost = BlogPost(
+            id: id,
+            title: title,
+            postedDate: stringDate,
+            body: text,
+            postUrlString: "",
+            likers: []
+        )
+        if let imageData = self.data {
+            createImageUrl(username: username, imageData: imageData, userId: id) { url in
+                newPost.postUrlString = url.absoluteString
+                self.savePost(blogPost: newPost, username: username)
             }
-//            let newPost = BlogPost(
-//                id: id,
-//                title: title,
-//                postedDate: stringDate,
-//                body: text,
-//                postUrlString: urlString,
-//                likers: []
-//            )
-//            savePost(newPost, username: username)
         } else {
-            let newPost = BlogPost(id: id, title: title, postedDate: stringDate, body: text, postUrlString: "", likers: [])
-            savePost(newPost, username: username)
+            savePost(blogPost: newPost, username: username)
         }
     }
     
-    func savePost(_ blogPost: BlogPost, username: String) {
+    func savePost(blogPost: BlogPost, username: String) {
         let dbRef = database.document("users/\(username)/posts/\(blogPost.id)")
         guard let blogPostData = blogPost.asDictionary() else {
             print("Could not encode the post data into dict")

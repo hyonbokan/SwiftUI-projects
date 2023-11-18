@@ -12,7 +12,7 @@ struct BlogPost: Codable, Identifiable {
     let title: String
     let postedDate: String
     let body: String
-    let postUrlString: String
+    var postUrlString: String
     var likers: [String]
     
     var date: Date {

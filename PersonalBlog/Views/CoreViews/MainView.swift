@@ -12,8 +12,8 @@ struct MainView: View {
     
     var body: some View {
         if viewModel.isSignedIn,
-           !viewModel.currentUser.isEmpty {
-            accountView(currentUser: UserDefaults.standard.string(forKey: "username") ?? "None")
+           !viewModel.username.isEmpty {
+            accountView(currentUser: viewModel.currentUser)
         } else {
             SignInView()
         }

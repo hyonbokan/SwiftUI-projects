@@ -20,22 +20,6 @@ class SignInViewViewModel: ObservableObject {
     
     init() {}
     
-//    func login() {
-//        guard validate() else {
-//            return
-//        }
-//        // Try log in
-//        Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
-//            if result != nil, error == nil {
-//                print("User logged in")
-//            } else {
-//                // show alert true
-//                self?.showAlert = true
-//                print("Can't log in")
-//                
-//            }
-//        }
-//    }
     func login() {
             guard validate() else {
                 showAlert = true
@@ -46,7 +30,6 @@ class SignInViewViewModel: ObservableObject {
                 if result != nil, error == nil {
                     strongSelf.findUserWithEmail(email: strongSelf.email) { user in
                         if let user = user {
-                            // Store email and username in cache
                             UserDefaults.standard.set(user.email, forKey: "email")
                             UserDefaults.standard.set(user.name, forKey: "username")
                             DispatchQueue.main.async {

@@ -50,9 +50,15 @@ struct HomeView: View {
                     Image(systemName: "plus")
                 }
             }
-            .sheet(isPresented: $viewModel.showingNewPostView, content: {
-                NewPostView(newItemPresented: $viewModel.showingNewPostView)
-            })
+            .sheet(isPresented: $viewModel.showingNewPostView) {
+                NewPostView(newItemPresented: $viewModel.showingNewPostView, username: currentUser)
+            }
+            .refreshable {
+//                viewModel.isDataFetched = false
+                viewModel.userPosts = []
+                viewModel.user = nil
+                viewModel.fetchData()
+            }
         }
     }
 }

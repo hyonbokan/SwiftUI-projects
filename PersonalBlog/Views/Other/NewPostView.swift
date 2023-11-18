@@ -10,6 +10,7 @@ import SwiftUI
 struct NewPostView: View {
     @StateObject var viewModel = NewPostViewViewModel()
     @Binding var newItemPresented: Bool
+    let username: String
     
     var body: some View {
         VStack(alignment: .center) {
@@ -62,11 +63,14 @@ struct NewPostView: View {
                     .frame(height: 300)
                 
                 OnboardButton(title: "Post", background: .purple) {
-                    viewModel.createPost()
+                    viewModel.createPost(username: username)
                     newItemPresented = false
                 }
                 .padding()
             }
+        }
+        .onDisappear{
+            print("New Post UI disappeared")
         }
     }
 }

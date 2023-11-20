@@ -25,16 +25,17 @@ class SignUpViewViewModel: ObservableObject {
             return
         }
         let newUser = User(name: name, email: email, profileImageUrl: nil)
+        UserDefaults.standard.set(newUser.name, forKey: "username")
+        UserDefaults.standard.set(newUser.email, forKey: "email")
         auth.createUser(withEmail: email, password: password) { [weak self] result, error in
             guard result != nil, error == nil else {
                 self?.errorMessage = "Couldn't register a new user"
                 return
             }
-            UserDefaults.standard.set(newUser.name, forKey: "username")
-            UserDefaults.standard.set(newUser.email, forKey: "email")
             self?.insertUserRecord(username: newUser.name, email: newUser.email)
+            let newUsername = UserDefaults.standard.string(forKey: "username") ?? "No user"
+            print("\n\(newUsername)\n")
         }
-        
     }
     
     private func insertUserRecord(username: String, email: String) {

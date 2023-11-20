@@ -21,33 +21,30 @@ class SignInViewViewModel: ObservableObject {
     init() {}
     
     func login() {
-            guard validate() else {
-                showAlert = true
-                return
-            }
-            Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
-                guard let strongSelf = self else { return }
-                if result != nil, error == nil {
-                    strongSelf.findUserWithEmail(email: strongSelf.email) { user in
-                        if let user = user {
-                            UserDefaults.standard.set(user.email, forKey: "email")
-                            UserDefaults.standard.set(user.name, forKey: "username")
-                            DispatchQueue.main.async {
-                                strongSelf.currentUser = user.name
-                            }
-                            print("User logged in and user data stored in cache")
-                        } else {
-                            print("User logged in but user data could not be found in database")
-                        }
+        guard validate() else {
+            showAlert = true
+            return
+        }
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
+            guard let email = self?.email else { return }
+            
+            if result != nil, error == nil {
+                print("\n User: \(email) is logging in \n")
+                self?.findUserWithEmail(email: email) { user in
+                    guard let user = user else {
+                        print("user with email: \(email) not found")
+                        return
                     }
-                } else {
-                    DispatchQueue.main.async {
-                        strongSelf.showAlert = true
-                    }
-                    print("Can't log in")
+                    UserDefaults.standard.set(user.name, forKey: "username")
                 }
+            } else {
+                DispatchQueue.main.async {
+                    self?.showAlert = true
+                }
+                print("Can't log in")
             }
         }
+    }
     
     private func validate() -> Bool {
         errorMessage = ""

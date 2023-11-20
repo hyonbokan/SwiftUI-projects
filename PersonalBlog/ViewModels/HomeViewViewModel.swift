@@ -97,7 +97,7 @@ class HomeViewViewModel: ObservableObject {
                         self?.storage.child("\(user.name)/profile_picture.png").downloadURL { url, error in
                             defer { group.leave() }
                             guard let url = url, error == nil else {
-                                print(error ?? "Unknown error")
+                                print("User profile image is not in the storage")
                                 return
                             }
                             DispatchQueue.main.async {

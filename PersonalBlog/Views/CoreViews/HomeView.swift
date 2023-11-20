@@ -42,6 +42,12 @@ struct HomeView: View {
 //                    viewModel.fetchData()
 //                }
             }
+            .refreshable {
+//                viewModel.isDataFetched = false
+                viewModel.userPosts = []
+                viewModel.user = nil
+                viewModel.fetchData()
+            }
             .navigationTitle("Home")
             .toolbar {
                 Button {
@@ -52,12 +58,6 @@ struct HomeView: View {
             }
             .sheet(isPresented: $viewModel.showingNewPostView) {
                 NewPostView(newItemPresented: $viewModel.showingNewPostView, username: currentUser)
-            }
-            .refreshable {
-//                viewModel.isDataFetched = false
-                viewModel.userPosts = []
-                viewModel.user = nil
-                viewModel.fetchData()
             }
         }
     }

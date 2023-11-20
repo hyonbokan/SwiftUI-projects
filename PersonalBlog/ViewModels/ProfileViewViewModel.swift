@@ -48,9 +48,9 @@ class ProfileViewViewModel : ObservableObject {
         }
         
         dispatchGroup.notify(queue: .main) { [weak self] in
-            if let user = user, let url = profileImageUrl {
+            if let user = user {
                 self?.user = user
-                self?.profileImageUrl = url
+                self?.profileImageUrl = profileImageUrl
                 self?.posts = posts
             } else {
                 print("An error occurred while fetching profile data.")
@@ -112,10 +112,11 @@ class ProfileViewViewModel : ObservableObject {
     }
     
     public func signOut() {
+        UserDefaults.standard.removeObject(forKey: "username")
+        UserDefaults.standard.removeObject(forKey: "email")
+        UserDefaults.standard.synchronize()
         do {
             try Auth.auth().signOut()
-            UserDefaults.standard.set("", forKey: "username")
-            UserDefaults.standard.set("", forKey: "email")
         } catch {
             print(error)
         }

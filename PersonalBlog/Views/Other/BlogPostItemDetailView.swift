@@ -53,7 +53,7 @@ struct BlogPostItemDetailView: View {
             }
         }
     }
-
+    
     func didTapLike() {
         print("\nIs post liked by the user: \(isLiked)")
         isLiked.toggle()

@@ -22,7 +22,7 @@ struct ProfileView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                profileHeader(username: username, profileImageUrl: viewModel.profileImageUrl)
+                profileHeader(username: viewModel.user?.name ?? "Username", profileImageUrl: viewModel.profileImageUrl)
                 
                 Spacer()
                 

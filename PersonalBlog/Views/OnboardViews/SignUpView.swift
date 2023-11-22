@@ -45,6 +45,8 @@ struct SignUpView: View {
                 
                 OnboardButton (title: "Sign Up", background: .purple) {
                     viewModel.register()
+                    UserDefaults.standard.set(viewModel.name, forKey: "username")
+                    UserDefaults.standard.set(viewModel.email, forKey: "email")
                 }
                 .padding()
             }

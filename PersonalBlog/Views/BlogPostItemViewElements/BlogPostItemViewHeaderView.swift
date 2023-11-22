@@ -27,7 +27,7 @@ struct BlogPostItemViewHeaderView: View {
                         .resizable()
                         .frame(width: 20, height: 20)
                         .clipShape(Circle())
-                        .foregroundColor(.purple)
+                        .foregroundStyle(.purple)
                 }
             Text(username)
                 .font(.system(size: 12))

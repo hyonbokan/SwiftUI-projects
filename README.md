@@ -23,7 +23,7 @@ This repository contains a collection of projects built using `SwiftUI`. Each pr
 
 - User authentication
 - Real-time database interactions
-- Image, post upload and delete to storage and database
+- Image/Post upload and delete from storage and database
 - Post like status and updates
 - Custom collection and table view cells
 - MVVM Design Pattern
@@ -50,17 +50,23 @@ In the development of **PersonalBlog**, I put a strong emphasis on refining the 
 - **Backend**: The backend of the app is powered by Firebase. All data is stored and fetched in real-time from Firebase Firestore.
 
 <p float="left">
-  <img src="Project_img/ToDo/ToDoList_login.png" width="200" style="margin-right: 10px;" />
-  <img src="Project_img/ToDo/ToDoList_register.png" width="200" style="margin-right: 10px;" />
-  <img src="Project_img/ToDo/ToDoList_main.png" width="200" style="margin-right: 10px;" /> 
-  <img src="Project_img/ToDo/ToDoList_profile.png" width="200" style="margin-right: 10px;" />
-  <img src="Project_img/ToDo/ToDoList_addItem.png" width="200" style="margin-right: 10px;" />
+  <img src="Project_img/ToDo/1.png" width="200" style="margin-right: 10px;" />
+  <img src="Project_img/ToDo/2.png" width="200" style="margin-right: 10px;" />
+  <img src="Project_img/ToDo/3.png" width="200" style="margin-right: 10px;" /> 
+  <img src="Project_img/ToDo/4.png" width="200" style="margin-right: 10px;" />
+  <img src="Project_img/ToDo/5.png" width="200" style="margin-right: 10px;" />
   <img src="Project_img/ToDo/ToDoList_video.gif" width="200" style="margin-right: 10px;" />
 </p>
 
 ### Airbnb
 
 **Airbnb** offers a simplified version of the popular Airbnb platform. This project was designed to provide a hands-on learning experience, focusing on API integration, data modeling.
+
+<p float="left">
+  <img src="Project_img/Airbnb/1.png" width="200" style="margin-right: 10px;" />
+  <img src="Project_img/Airbnb/2.png" width="200" style="margin-right: 10px;" />
+  <img src="Project_img/Airbnb/3.png" width="200" style="margin-right: 10px;" /> 
+</p>
 
 #### Key Features:
 

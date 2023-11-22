@@ -16,6 +16,7 @@ class MainViewViewModel: ObservableObject {
     private var handler: AuthStateDidChangeListenerHandle?
     
     init() {
+        print("Main View: \(currentUser)")
         self.handler = Auth.auth().addStateDidChangeListener({ [weak self] _, user in
             DispatchQueue.main.async {
                 self?.username = user?.email ?? ""

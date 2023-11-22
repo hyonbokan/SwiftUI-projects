@@ -25,7 +25,7 @@ struct BlogPostItemDetailView: View {
                 
                 bodyTextView(text: model.body)
                 
-                userInfoView(imageURL: userProfileImage ?? URL(string: "")!, userName: user.name)
+                userInfoView(imageURL: userProfileImage, userName: user.name)
             }
         }
         .navigationTitle(model.title)
@@ -102,16 +102,24 @@ struct BlogPostItemDetailView: View {
     }
     
     @ViewBuilder
-    func userInfoView(imageURL: URL, userName: String) -> some View {
+    func userInfoView(imageURL: URL?, userName: String) -> some View {
         HStack {
             NavigationLink {
                 ProfileView(username: userName, isCurrentUser: userName == UserDefaults.standard.string(forKey: "username"))
             } label: {
-                AsyncImage(url: imageURL) { image in
-                    image.image?.resizable()
+                if (imageURL != nil) {
+                    AsyncImage(url: imageURL) { image in
+                        image.image?.resizable()
+                    }
+                    .frame(width: 75, height: 75)
+                    .clipShape(Circle())
+                } else {
+                    Image(systemName: "person.fill")
+                        .resizable()
+                        .frame(width: 75, height: 75)
+                        .clipShape(Circle())
+                        .foregroundStyle(.purple)
                 }
-                .frame(width: 75, height: 75)
-                .clipShape(Circle())
             }
             
             Text(userName)

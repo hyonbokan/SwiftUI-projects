@@ -82,10 +82,10 @@ class HomeViewViewModel: ObservableObject {
     }
     
     func fetchData() {
-//        guard !isDataFetched else {
-//            return
-//        }
-//        isDataFetched = true
+        guard !isDataFetched else {
+            return
+        }
+        isDataFetched = true
         findAllUsers { [weak self] users in
             let group = DispatchGroup()
             for user in users {
@@ -94,12 +94,8 @@ class HomeViewViewModel: ObservableObject {
                     switch result {
                     case .success(let posts):
                         // Get the profile picture URL
-                        self?.storage.child("\(user.name)/profile_picture.png").downloadURL { url, error in
+                        self?.storage.child("\(user.name)/profile_picture.png").downloadURL { url, _ in
                             defer { group.leave() }
-                            guard let url = url, error == nil else {
-                                print("User profile image is not in the storage")
-                                return
-                            }
                             DispatchQueue.main.async {
                                 let userBlogPosts = UserBlogPosts(id: UUID().uuidString, posts: posts, owner: user, userProfileImage: url)
                                 self?.userPosts.append(userBlogPosts)

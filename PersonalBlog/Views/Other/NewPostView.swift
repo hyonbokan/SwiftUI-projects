@@ -11,7 +11,7 @@ struct NewPostView: View {
     @StateObject var viewModel = NewPostViewViewModel()
     @Binding var newItemPresented: Bool
     let username: String
-    
+
     var body: some View {
         VStack(alignment: .center) {
             Form {

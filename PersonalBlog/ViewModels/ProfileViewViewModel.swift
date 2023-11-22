@@ -114,7 +114,7 @@ class ProfileViewViewModel : ObservableObject {
     public func signOut() {
         UserDefaults.standard.removeObject(forKey: "username")
         UserDefaults.standard.removeObject(forKey: "email")
-        UserDefaults.standard.synchronize()
+        print("Sign Out.. username: \(UserDefaults.standard.string(forKey: "username"))")
         do {
             try Auth.auth().signOut()
         } catch {

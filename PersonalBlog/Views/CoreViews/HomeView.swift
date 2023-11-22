@@ -10,11 +10,11 @@ import SwiftUI
 struct HomeView: View {
     @StateObject var viewModel: HomeViewViewModel
     @State var isLiked = false
-    let currentUser: String
+    let currentUser = UserDefaults.standard.string(forKey: "username") ?? "Username"
     
-    init(currentUser: String) {
+    init() {
         self._viewModel = StateObject(wrappedValue: HomeViewViewModel())
-        self.currentUser = currentUser
+        print("HomeView currentUser: \(currentUser)")
     }
     
     var body: some View {
@@ -35,15 +35,15 @@ struct HomeView: View {
                 }
                 .listStyle(PlainListStyle())
             }.onAppear {
-                viewModel.userPosts = []
-                viewModel.user = nil
-                viewModel.fetchData()
-//                if !viewModel.isDataFetched {
-//                    viewModel.fetchData()
-//                }
+//                viewModel.userPosts = []
+//                viewModel.user = nil
+//                viewModel.fetchData()
+                if !viewModel.isDataFetched {
+                    viewModel.fetchData()
+                }
             }
             .refreshable {
-//                viewModel.isDataFetched = false
+                viewModel.isDataFetched = false
                 viewModel.userPosts = []
                 viewModel.user = nil
                 viewModel.fetchData()
@@ -65,6 +65,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(currentUser: "Akagi")
+        HomeView()
     }
 }

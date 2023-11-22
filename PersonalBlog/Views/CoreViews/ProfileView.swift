@@ -12,7 +12,7 @@ struct ProfileView: View {
     @StateObject var viewModel = ProfileViewViewModel()
     
     let username: String
-    let isCurrentUser: Bool
+    let isCurrentUser: Bool 
     
     let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 16),
